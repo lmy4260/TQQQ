@@ -10,7 +10,7 @@ using System.Windows.Forms;
 
 namespace WindowsFormsApp4
 {
-    public partial class Form1 : Form
+    public partial class Form1 : MainForm
     {
         public Form1()
         {

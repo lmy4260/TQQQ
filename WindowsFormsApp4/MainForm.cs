@@ -1,0 +1,63 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+using WeifenLuo.WinFormsUI.Docking;
+
+namespace WindowsFormsApp4
+{
+    public partial class MainForm : Form
+    {
+        private static DockPanel _dockPanel;
+        public MainForm()
+        {
+            InitializeComponent();
+            _dockPanel = new DockPanel
+            {
+                Dock = DockStyle.Fill
+            };
+            Controls.Add(_dockPanel);
+
+            _dockPanel.Theme = new VS2015DarkTheme();
+
+            LoadDockingWindows();
+
+
+        }
+
+        private void LoadDockingWindows()
+        {
+            //도킹해제 금지 설정
+            _dockPanel.AllowEndUserDocking = false;
+
+            //메인폼 설정
+            var cameraWindow = new CameraForm();
+            cameraWindow.Show(_dockPanel, DockState.Document);
+
+            //속성창 추가
+            var propWindow = new PropertiesForm();
+            propWindow.Show(_dockPanel, DockState.DockRight);
+        }
+
+        public static T GetDockForm<T>() where T : DockContent
+        {
+            var findForm = _dockPanel.Contents.OfType<T>().FirstOrDefault();
+            return findForm;
+        }
+
+        private void imageOpenToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void imageSaveToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+    }
+}
